@@ -1,9 +1,11 @@
 
 package com.buildflow.modules.workflow.api;
 
+import com.buildflow.modules.system.api.dto.SystemStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.time.Instant;
 
@@ -18,9 +20,4 @@ public class SystemController {
                 Instant.now()
         );
     }
-
-    public record SystemStatus(
-            String message,
-            Instant timestamp
-    ) {}
 }
