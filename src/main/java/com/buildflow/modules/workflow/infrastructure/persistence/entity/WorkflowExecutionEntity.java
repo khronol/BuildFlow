@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +14,16 @@ import java.util.UUID;
 public class WorkflowExecutionEntity {
     protected WorkflowExecutionEntity(){
 
+    }
+
+    public WorkflowExecutionEntity(
+            WorkflowEntity workflow,
+            ExecutionStatus status,
+            Instant createdAt
+    ) {
+        this.workflow = Objects.requireNonNull(workflow);
+        this.status = Objects.requireNonNull(status);
+        this.createdAt = Objects.requireNonNull(createdAt);
     }
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -41,4 +52,16 @@ public class WorkflowExecutionEntity {
 
     @OneToMany(mappedBy = "workflowExecution", fetch = FetchType.LAZY)
     private List<TaskExecutionEntity> taskExecutions = new ArrayList<>();
+
+    public UUID getId() {
+        return id;
+    }
+
+    public WorkflowEntity getWorkflow() {
+        return workflow;
+    }
+
+    public ExecutionStatus getStatus() {
+        return status;
+    }
 }

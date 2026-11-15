@@ -12,8 +12,13 @@ import java.util.UUID;
 @Table(name = "workflows")
 public class WorkflowEntity{
 
-    protected WorkflowEntity() {
-
+    protected  WorkflowEntity() {}
+    public WorkflowEntity(String name, String description, WorkflowStatus status, Instant createdAt, Instant updatedAt) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     @Id
@@ -43,4 +48,21 @@ public class WorkflowEntity{
 
     @OneToMany(mappedBy = "workflow", fetch = FetchType.LAZY)
     private List<WorkflowExecutionEntity> executions = new ArrayList<>();
+
+    public UUID getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public List<WorkflowStepEntity> getSteps(){
+        return steps;
+    }
+
+    public void addStep(WorkflowStepEntity step) {
+        steps.add(step);
+        step.setWorkflow(this);
+    }
 }
