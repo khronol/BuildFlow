@@ -58,7 +58,23 @@ public class WorkflowEntity{
     }
 
     public List<WorkflowStepEntity> getSteps(){
-        return steps;
+        return List.copyOf(steps);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public WorkflowStatus getStatus() {
+        return status;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 
     public void addStep(WorkflowStepEntity step) {

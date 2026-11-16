@@ -1,6 +1,8 @@
 
 package com.buildflow.modules.workflow.domain.model;
 
+import tools.jackson.databind.JsonNode;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,6 +15,7 @@ public class WorkflowStep {
     private final int stepOrder;
 
     private final TaskType taskType;
+    private final JsonNode configuration;
 
     private final int maxRetries;
     private final int timeoutSeconds;
@@ -24,7 +27,8 @@ public class WorkflowStep {
             int stepOrder,
             TaskType taskType,
             int maxRetries,
-            int timeoutSeconds
+            int timeoutSeconds,
+            JsonNode configuration
     ) {
         this.id = Objects.requireNonNull(id);
         this.workflowId = Objects.requireNonNull(workflowId);
@@ -58,6 +62,7 @@ public class WorkflowStep {
         this.stepOrder = stepOrder;
         this.maxRetries = maxRetries;
         this.timeoutSeconds = timeoutSeconds;
+        this.configuration = Objects.requireNonNull(configuration).deepCopy();
     }
 
     public UUID getId() {
@@ -86,5 +91,9 @@ public class WorkflowStep {
 
     public int getTimeoutSeconds() {
         return timeoutSeconds;
+    }
+
+    public JsonNode getConfiguration() {
+        return configuration.deepCopy();
     }
 }

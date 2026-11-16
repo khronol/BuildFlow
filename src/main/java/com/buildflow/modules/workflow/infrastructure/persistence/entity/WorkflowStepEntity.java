@@ -72,6 +72,26 @@ public class WorkflowStepEntity{
         return id;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public int getStepOrder(){
+        return stepOrder;
+    }
+
+    public TaskType getTaskType(){
+        return taskType;
+    }
+
+    public int getMaxRetries(){
+        return maxRetries;
+    }
+
+    public int getTimeoutSeconds(){
+        return timeoutSeconds;
+    }
+
     public JsonNode getConfiguration() {
         return configuration;
     }

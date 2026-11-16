@@ -24,6 +24,53 @@ public class Workflow {
             UUID id,
             String name,
             String description,
+            WorkflowStatus status,
+            Instant createdAt,
+            Instant updatedAt,
+            List<WorkflowStep> steps
+    ){
+
+        this.id = Objects.requireNonNull(id);
+        this.name = Objects.requireNonNull(name);
+        if(name.isBlank()){
+            throw new IllegalArgumentException(
+                    "Workflow name cannot be blank"
+            );
+        }
+        this.description = description;
+        this.status = Objects.requireNonNull(status);
+        this.createdAt = Objects.requireNonNull(createdAt);
+        this.updatedAt = Objects.requireNonNull(updatedAt);
+        this.steps = new ArrayList<>(Objects.requireNonNull(steps));
+    }
+
+    public Workflow(
+            UUID id,
+            String name,
+            String description,
+            WorkflowStatus status,
+            Instant createdAt,
+            Instant updatedAt
+    ){
+
+       this.id = Objects.requireNonNull(id);
+       this.name = Objects.requireNonNull(name);
+        if(name.isBlank()){
+            throw new IllegalArgumentException(
+                    "Workflow name cannot be blank"
+            );
+        }
+       this.description = description;
+       this.status = Objects.requireNonNull(status);
+       this.createdAt = Objects.requireNonNull(createdAt);
+       this.updatedAt = Objects.requireNonNull(updatedAt);
+       this.steps = new ArrayList<>();
+    }
+
+    public Workflow(
+            UUID id,
+            String name,
+            String description,
             Instant createdAt
     ) {
         this.id = Objects.requireNonNull(id);
@@ -44,11 +91,13 @@ public class Workflow {
     }
 
     public void activate(Instant now) {
+        Objects.requireNonNull(now);
         this.status = WorkflowStatus.ACTIVE;
         this.updatedAt = Objects.requireNonNull(now);
     }
 
     public void deactivate(Instant now) {
+        Objects.requireNonNull(now);
         this.status = WorkflowStatus.INACTIVE;
         this.updatedAt = Objects.requireNonNull(now);
     }

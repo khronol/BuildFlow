@@ -2,8 +2,6 @@ package com.buildflow.modules.workflow.infrastructure.persistence.repository;
 
 import com.buildflow.modules.workflow.domain.model.WorkflowStatus;
 import com.buildflow.modules.workflow.infrastructure.persistence.entity.WorkflowEntity;
-import org.hibernate.annotations.DialectOverride;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
